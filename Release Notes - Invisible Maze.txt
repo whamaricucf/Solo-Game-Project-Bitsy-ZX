@@ -1,0 +1,43 @@
+﻿Invisible Maze v1.2 - Release Notes 
+
+
+﻿
+Game Project: Invisible Maze
+Creator: William Hamaric
+Version: 1.2
+Date: 1/19/2025
+
+
+New features
+* ﻿Music
+   * First room music
+   * Second room music
+   * End music
+* Gas money story
+   * Players now need to collect money from several cats (Vance and Matthew) before giving it to a cat that needs gas money (Jared). Jared will give the player a portal key item which allows them to travel through portals.
+* New character sprites
+   * Exclamation Point hints
+   * Creature of the Wall
+   * New Cats
+      * Steven and Lauren
+﻿
+Fixes
+* ﻿None.
+﻿
+Improvements
+* Dialogue changes
+   * Sam’s dialogue was updated for the introduction of Steven
+   * More flavor text
+      * Steven and Lauren
+      * Creature of the Wall
+   * Dialogue changes based on where you are at in the Gas money story
+      * Applies to Matthew, Vance, and Jared cats
+
+
+
+
+Known Bugs
+* None.
+
+
+﻿

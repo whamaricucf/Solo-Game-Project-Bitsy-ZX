@@ -57,11 +57,11 @@ NAME YELLOW
 
 ROOM 0
 f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f
-f,0,0,a,0,0,0,a,0,0,0,a,0,0,0,f
+f,g,0,a,0,0,0,a,0,0,0,a,0,0,0,f
 f,a,0,a,0,a,0,a,c,a,0,a,0,a,0,f
 f,0,0,a,0,0,0,a,a,0,0,a,0,a,0,f
 f,0,a,0,0,a,0,a,0,a,0,a,0,0,a,f
-f,0,a,0,a,a,0,a,0,a,0,0,a,0,0,f
+f,0,a,0,a,0,0,a,0,a,0,0,a,0,0,f
 f,0,0,0,0,a,0,a,0,0,a,0,a,0,0,f
 f,a,a,a,a,a,a,0,a,0,a,0,0,a,0,f
 f,0,0,0,0,0,a,0,0,0,a,0,0,0,0,f
@@ -73,9 +73,10 @@ f,0,0,0,a,0,0,0,a,0,0,a,0,a,a,f
 f,0,0,0,a,0,a,0,0,a,0,0,0,0,0,f
 f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f
 NAME Room1
-EXT 8,2 1 8,2
+EXT 8,2 1 8,2 FX tunnel DLG f
 END 3 1,1
 PAL 0
+TUNE 5
 
 ROOM 1
 f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f
@@ -95,8 +96,9 @@ f,0,0,a,a,a,0,0,0,0,a,0,0,a,0,f
 f,a,0,0,0,0,0,0,a,0,0,0,a,a,c,f
 f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f
 NAME Room2
-EXT 14,14 0 6,6
+EXT 14,14 0 6,6 FX tunnel DLG i
 PAL 2
+TUNE 6
 
 TIL a
 00000000
@@ -141,6 +143,26 @@ TIL f
 01010101
 NAME VisibleWall
 WAL true
+
+TIL g
+00000000
+00100000
+00111100
+00111110
+00101110
+00100000
+00100000
+00100000
+>
+00000000
+00101110
+00111110
+00111100
+00100000
+00100000
+00100000
+00100000
+NAME Exit
 
 SPR A
 00011000
@@ -339,69 +361,229 @@ NAME Jordan
 DLG a
 POS 0 1,2
 
-ITM 0
+SPR i
 00000000
+00001000
+00001000
+00001000
+00001000
 00000000
+00001000
 00000000
-00111100
-01100100
-00100100
-00011000
+>
 00000000
-NAME tea
-DLG 1
+00010000
+00010000
+00010000
+00010000
+00000000
+00010000
+00000000
+NAME Hint1
+DLG b
+POS 0 5,7
 
-ITM 1
+SPR j
+00000000
+00001000
+00001000
+00001000
+00001000
+00000000
+00001000
+00000000
+>
+00000000
+00010000
+00010000
+00010000
+00010000
+00000000
+00010000
+00000000
+NAME Hint2
+DLG c
+POS 1 10,6
+
+SPR k
+11111111
+10101010
+11111111
+01010101
+11111111
+10101010
+11111111
+01010101
+NAME Wall Being
+DLG h
+POS 1 4,0
+
+SPR l
+00000000
+00000000
+01001010
+01001110
+01001110
+00111110
+00111100
+00100100
+>
+00000000
+00000000
+10001010
+10001110
+01001110
+00111110
+00111100
+00100100
+NAME Steven
+DLG j
+POS 1 1,1
+
+SPR m
+00000000
+00000000
+01010001
+01110001
+01110010
+01111100
+00111100
+00100100
+>
+00000000
+00000000
+01010010
+01110010
+01110010
+01111100
+00111100
+00100100
+NAME Lauren
+DLG k
+POS 1 7,11
+
+ITM 2
+00000000
+01111110
+01000010
+01011010
+01011010
+01000010
+01111110
+00000000
+>
+00000000
 00000000
 00111100
 00100100
+00100100
 00111100
+00000000
+00000000
+NAME Portal Key
+DLG g
+
+ITM 3
+00000000
+00001000
+00111110
+00101000
+00111110
+00001010
+00111110
+00001000
+>
 00010000
-00011000
+01111100
+01010000
+01111100
+00010100
+01111100
 00010000
-00011000
-NAME key
-DLG 2
-BLIP 2
+00000000
+NAME Dollars
 
 DLG 0
 """
 George
-All you have to do is get to the top left of this room.
+I think that flag is the way out.
 """
 NAME cat dialog
 
-DLG 1
-You found a nice warm cup of tea
-NAME tea dialog
-
-DLG 2
-A key! {wvy}What does it open?{wvy}
-NAME key dialog
-
 DLG 3
-You've escaped the maze and its talking cats.
+You've escaped the maze and its talking cats.{tune "4"}
 NAME ending 1
 
 DLG 4
 """
-Vance
-I have a bachelors in Computer Science.
+{
+  - {item "Portal Key"} < 1 ?
+    {
+      - {item "Dollars"} < 3 ?
+        Vance
+        I have a bachelors in Computer Science.
+        Here's 3 dollars.
+        {item "Dollars" {{item "Dollars"} + 3}}
+      - else ?
+        Vance
+        I have a bachelors in Computer Science.
+        Enjoy the cash, little man.
+    }
+  - else ?
+    Vance
+    I have a bachelors in Computer Science.
+}
 """
 NAME Vance dialog
 
 DLG 5
 """
-Jared
-I need gas money.
-Can I borrow $5?
+{
+  - {item "Portal Key"} == 0 ?
+    {
+      - {item "Dollars"} >= 5 ?
+        Jared
+        Gas money!
+        {item "Dollars" {{item "Dollars"} - 5}}Here's a portal key.
+        {item "Portal Key" 1}
+      - else ?
+        Jared
+        I need gas money.
+        Can I borrow $5?
+    }
+  - else ?
+    Jared
+    Thanks for the gas money!!
+}
 """
 NAME Jared dialog
 
 DLG 6
 """
-Matthew
-Tip: You went the wrong way.
+{
+  - {item "Portal Key"} == 0 ?
+    {
+      - {item "Dollars"} == 3 ?
+        Matthew
+        You need gas money?
+        Here's 2 dollars.
+        {item "Dollars" {{item "Dollars"} + 2}}
+      - else ?
+        {
+          - {item "Dollars"} < 2 ?
+            Matthew
+            You're broke?
+            Here's 2 dollars, friend.{item "Dollars" {{item "Dollars"} + 2}}
+          - else ?
+            Matthew
+            Go speak to Vance or Jared
+            if you haven't already.
+        }
+    }
+  - else ?
+    Matthew
+    Tip: You can probably get to the blue portal now.
+}
 """
 NAME Matthew dialog
 
@@ -409,6 +591,7 @@ DLG 7
 """
 Sam
 hi.
+{shk}why is steven backwards{/shk}
 """
 NAME Sam dialog
 
@@ -433,6 +616,78 @@ The exit is right behind me.
 """
 NAME Jordan dialog
 
+DLG b
+"""
+Sentient Exclamation
+It seems you can't get to the flag from here.
+Try getting to that blue portal.
+"""
+NAME Hint1 dialog
+
+DLG c
+"""
+Mark
+If you can't seem to get out,
+try talking to all of the cats.
+"""
+NAME Hint2 dialog
+
+DLG d
+"""
+{
+  - {item "1"} >= 1 ?
+    {property locked false}The key opens the door!
+  - else ?
+    {property locked true}The door is locked...
+}
+"""
+NAME locked exit 1
+
+DLG f
+"""
+{
+  - {item "Portal Key"} >= 1 ?
+    {property locked false}The portal key is letting me in!
+  - else ?
+    {property locked true}The portal won't let me through...
+}
+"""
+NAME Blue Portal
+
+DLG g
+"""
+A portal key!
+This will let me in the portal.
+"""
+NAME Portal Key dialog
+
+DLG h
+"""
+Creature of the Wall
+I am the WALL!
+"""
+NAME Wall Being dialog
+
+DLG i
+I'm almost at the end!
+NAME exit narration 1
+
+DLG j
+"""
+Steven
+If you can reach Claire
+you can probably reach the end.
+"""
+NAME Steven dialog
+
+DLG k
+"""
+Lauren
+Surprise!
+I'm not Claire.
+"""
+NAME Lauren dialog
+
 VAR a
 42
 
@@ -451,7 +706,7 @@ TUNE 1
 NAME finale fanfare
 KEY C,D,E,F,G,A,B d,r,m,s,l
 TMP XFST
-SQR P2 P8
+SQR P4 P8
 ARP INT8
 
 TUNE 2
@@ -507,6 +762,162 @@ C3,A#3,C,E,A,0,A#,0,0,B2,B3,0,2F,0,0,0
 A#,0,A#3,0,C#,0,F,0,A#,0,0,0,0,0,0,0
 A#2,0,C#3,0,F3,0,A#3,0,D,0,0,0,0,F#3,0,F3
 NAME rhythmic ruins
+TMP MED
+SQR P4 P4
+
+TUNE 4
+0,C5,C5,C5,4C5,0,0,0,4G#,0,0,0,4A#,0,0,0
+0,C3,C3,C3,4C3,0,0,0,4G#2,0,0,0,4A#2,0,0,0
+>
+C5,0,2A#,0,12C5,0,0,0,0,0,0,0,0,0,0,0
+C3,0,2A#2,0,12C3,0,0,0,0,0,0,0,0,0,0,0
+>
+G#,C5,G#,F,G#,0,G#,C5,G#,F,G#,A#,C5,A#,G#,F
+6G#3,0,0,0,0,0,6G#3,0,0,0,0,0,4G#3,0,0,0
+>
+A,C5,A,F,A,0,A,C5,A,F,A,A#,C5,A#,A,F
+6A3,0,0,0,0,0,6A3,0,0,0,0,0,4A3,0,0,0
+>
+G#,C5,G#,F,G#,0,G#,C5,G#,F,G#,A#,C5,A#,G#,F
+6C#3,0,0,0,0,0,6C#3,0,0,0,0,0,4C#3,0,0,0
+>
+G#,C5,G#,E,G#,0,G#,C5,G#,E,G#,A#,C5,A#,G#,E
+6F3,0,0,0,0,0,6F3,0,0,0,0,0,4F3,0,0,0
+>
+G#,C5,G#,F,G#,0,G#,C5,G#,F,G#,A#,C5,A#,G#,F
+6C3,0,0,0,0,0,6C3,0,0,0,0,0,4C3,0,0,0
+>
+A,C5,A,F,A,0,A,C5,A,F,A,A#,C5,A#,A,F
+6A2,0,0,0,0,0,6A2,0,0,0,0,0,4A2,0,0,0
+>
+A#,C#5,A#,F#,A#,0,A#,C#5,A#,F#,A#,C5,C#5,C5,A#,F#
+6F#2,0,0,0,0,0,6F#2,0,0,0,0,0,4F#2,0,0,0
+>
+A#,C#5,A#,F#,A#,0,A#,C#5,A#,F#,A#,C5,C#5,C5,A#,F#
+6C#3,0,0,0,0,0,6C#3,0,0,0,0,0,4C#3,0,0,0
+>
+A#,D5,A#,F#,A#,0,A#,D5,A#,F#,A#,C5,D5,C5,A#,F#
+6D3,0,0,0,0,0,6D3,0,0,0,0,0,4D3,0,0,0
+>
+A#,D5,A#,F#,A#,0,A#,D5,A#,F#,A#,C5,D5,C5,A#,F#
+6D3,0,0,0,0,0,6D3,0,0,0,0,0,4D3,0,0,0
+>
+G#,C5,G#,F,G#,0,G#,C5,G#,F,G#,A#,C5,A#,G#,F
+6G#3,0,0,0,0,0,6G#3,0,0,0,0,0,4G#3,0,0,0
+>
+A,C5,A,F,A,0,A,C5,A,F,A,A#,C5,A#,A,F
+6A3,0,0,0,0,0,6A3,0,0,0,0,0,4A3,0,0,0
+>
+G#,C5,G#,F,G#,0,G#,C5,G#,F,G#,A#,C5,A#,G#,F
+6C#3,0,0,0,0,0,6C#3,0,0,0,0,0,4C#3,0,0,0
+>
+G#,C5,G#,E,G#,0,G#,C5,G#,E,G#,A#,C5,A#,G#,E
+6F3,0,0,0,0,0,6F3,0,0,0,0,0,4F3,0,0,0
+NAME Victory Fanfare
+TMP FST
+SQR P4 P4
+
+TUNE 5
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+C2,C3,C2,C3,C2,C2,C3,C2,C3,C3,C2,C3,C2,C3,C2,C3
+>
+0,0,0,0,0,0,0,0,4A,0,0,0,4C5,0,0,0
+C2,C3,C2,C3,C2,C2,C3,C2,C3,C3,C2,C3,C2,C3,C2,C3
+>
+2D5,0,2C5,0,2A,0,2G,0,3F,0,0,F,4C5,0,0,0
+C2,C3,C2,C3,C2,C2,C3,C2,C3,C3,C2,C3,C2,C3,C2,C3
+>
+4C5,0,0,0,0,0,A,C5,4F5,0,0,0,4C5,0,0,0
+C2,C3,C2,C3,C2,C2,C3,C2,C3,C3,C2,C3,C2,C3,C2,C3
+>
+2D#5,0,2A#,0,2A,0,2F,0,3C5,0,0,C5,4D#,0,0,0
+C2,C3,C2,C3,C2,C2,C3,C2,C3,C3,C2,C3,C2,C3,C2,C3
+>
+2G3,0,2A#3,0,2F,0,2A#,0,2F5,0,2F5,0,2D#5,0,2C5,0
+D2,D3,D2,D3,D#2,D#2,D#3,D#2,D#3,D#3,D#2,D#3,F2,F3,F2,F3
+>
+2A5,0,2A5,0,2G5,0,2D#5,0,2D,0,C5,A#,G,A,F,A#
+G2,G3,G2,G3,G2,G2,G3,G2,G3,G3,G2,G3,G2,G3,G2,G3
+>
+2D#,0,A,A#,C5,G,A,F,2A,0,D5,C5,A,G,A#,D5
+G2,G3,G2,G3,G2,G2,G3,G2,G3,G3,G2,G3,G2,G3,G2,G3
+>
+2A#,0,D5,F5,G5,D#5,D5,A5,2D#5,0,F5,A5,C5,G5,A#5,D5
+G2,G3,G2,G3,G2,G2,G3,G2,G3,G3,G2,G3,G2,G3,G2,G3
+>
+2G3,0,2A#3,0,2F,0,2A#,0,2D,0,C5,A#,A,F,D#,D
+2F2,0,2G2,0,2A#2,0,2F3,0,C2,C3,C2,C3,C2,C2,C3,C2
+>
+2G,0,A#,A,G,F,A,C5,2D,0,C5,A#,A,F,D#,D
+C3,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C2,C3,C2
+>
+2G,0,A#,A,G,F,A,C5,2D,0,C5,A#,A,F,D#,D
+C3,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C2,C3,C2
+>
+2G,0,A#,A,G,F,A,C5,2D,0,C5,A#,A,F,D#,D
+C3,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C3,C2,C2,C3,C2
+>
+2G,0,A#,A,G,F,A,C5,2A#3,0,F5,D#5,C5,A#,G,F
+C3,C3,C2,C3,C2,C3,C2,C3,F2,D3,F2,D3,F2,F2,D3,F2
+>
+2D#,0,D#5,C5,D5,A,D5,F5,2A,0,G5,F5,G5,D#5,A5,C5
+D#3,D#3,G2,D#3,G2,D#3,G2,D#3,A2,F3,A2,F3,A2,A2,F3,A2
+>
+2A#,0,A#,D5,D#5,C5,D#5,G5,2A#5,0,2F5,0,2C5,0,2G,0
+G3,G3,A#2,G3,A#2,G3,A#2,G3,2F3,0,2D3,0,2A#2,0,2G2,0
+NAME Hiraeth
+TMP MED
+SQR P4 P4
+
+TUNE 6
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,4A#2,0,0,0
+>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,2C2,0,2C#2,0
+>
+2D,0,2E,0,3F,0,0,E,3D,0,0,A#3,4C,0,0,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,2A#2,0,2D3,0
+>
+2D,0,2E,0,3F,0,0,E,G,F,E,D,2A#3,0,2C#,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,C2,D2,C#2,G#2
+>
+2D,0,2E,0,3F,0,0,A,A#,A,G,F,4E,0,0,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,2D2,0,2A#2,0
+>
+2D,0,2E,0,3F,0,0,G,A,2F,0,D,2A#3,0,2C#,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,2C2,0,2C#2,0
+>
+2D,0,2E,0,3F,0,0,E,2F,0,2E,0,3D,0,0,E
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,2D2,0,D3,E3
+>
+2D,0,2E,0,3F,0,0,E,2F,0,2E,0,3D,0,0,E
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,C2,D2,C#2,G#2
+>
+A,0,A,0,A,0,A,0,A,0,A,0,4A#,0,0,0
+2D2,0,2E2,0,3F2,0,0,E2,3D2,0,0,A#2,4C2,0,0,0
+>
+A,0,A,0,A,0,A,0,A,0,A,0,2A#3,0,2C#,0
+2D2,0,2E2,0,3F2,0,0,E2,G2,F2,E2,D2,2A#2,0,2C#3,0
+>
+A,0,A,0,A,0,A,0,A,0,A,0,3A#,0,0,G
+2D2,0,2E2,0,3F2,0,0,A2,A#2,A2,G2,F2,4E2,0,0,0
+>
+A,0,A,0,A,0,A,0,A,0,A,0,2A#3,0,2C#,0
+2D2,0,2E2,0,3F2,0,0,G2,A2,2F2,0,D2,2A#2,0,2C#2,0
+>
+A,0,A,0,A,0,A,G,A,0,A,0,A#,A,G,F
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,4A#2,0,0,0
+>
+A,0,A,0,A,0,A,G#,A,0,A,0,2A#3,0,2C#,0
+D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,D2,A2,C2,D2,C#2,G#2
+>
+3A#,0,0,3A,0,0,A#,G,3A,0,0,F,2E,0,2F,0
+3D2,0,0,3D2,0,0,2D2,0,3C2,0,0,3C2,0,0,2C2,0
+>
+3A#,0,0,3A#,0,0,2A#,0,3A,0,0,3A,0,0,2A,0
+3E2,0,0,3E2,0,0,2E2,0,3D2,0,0,3D2,0,0,2D2,0
+NAME BSM
 TMP MED
 SQR P4 P4
 
